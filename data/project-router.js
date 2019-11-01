@@ -19,6 +19,16 @@ router.get('/:id', async (req, res) => {
     res.end();
 });
 
+router.get('/:id/actions', async (req, res) => {
+    const id = req.params.id;
+
+    !!id === true &&
+        await projects.getProjectActions(id)
+            .then(projectById => res.status(200).json(projectById))
+            .catch(err => res.status(500).json({ errorMessage: "GIVE ME FLOWER FIRST, THEN YOU GET THE PROJECT." }))
+    res.end();
+});
+
 router.post('/', async (req, res) => {
     const project = req.body;
 
